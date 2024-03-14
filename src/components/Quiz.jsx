@@ -4,11 +4,21 @@ import quizCompleteImg from "../assets/quiz-complete.png";
 import QuestionTimer from "./QuestionTimer";
 
 export default function Quiz() {
-    const [userAnsers, setUserAnswer] = useState([]);
+    const [userAnswers, setUserAnswer] = useState([]);
 
-    const activeQuestionIndex = userAnsers.length;
+    const activeQuestionIndex = userAnswers.length;
     const quizIsComplete  = activeQuestionIndex === QUESTIONS.length;
+    
+    
 
+    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
+        setUserAnswer((prevUserAnswer) => {
+            return [...prevUserAnswer, selectedAnswer];
+        });
+    },[]);
+
+    const handleSkipAnswer = useCallback(() =>  handleSelectAnswer(null), [handleSelectAnswer])
+    
     if (quizIsComplete) {
         return <div id="summary">
         <img src={quizCompleteImg} alt="quizCompleteImg"/>
@@ -18,15 +28,6 @@ export default function Quiz() {
 
     const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
     shuffledAnswers.sort(() => Math.random() -0.5);
-
-    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
-        setUserAnswer((prevUserAnswer) => {
-            return [...prevUserAnswer, selectedAnswer];
-        });
-    },[]);
-
-    const handleSkipAnswer = useCallback(() =>  handleSelectAnswer(null), [handleSelectAnswer])
-
     return (
         <div id="quiz">
         <div id="question">
