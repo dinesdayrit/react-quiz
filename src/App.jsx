@@ -4,10 +4,12 @@ import Quiz from "./components/Quiz";
 
 function App() {
     return(
-        <main>
+        <>
         <Header />
+        <main>
         <Quiz />
         </main>
+        </>
     )
 }
 
