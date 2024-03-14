@@ -18,23 +18,26 @@ export default function Question ({index, onSelectAnswer, onSkipAnswer}){
         setTimeout(() => {
             setAnswer({
                 selectedAnswer: answer,
-                isCorrect: QUESTIONS[key].answers[0] === answer
+                isCorrect: QUESTIONS[index].answers[0] === answer
             })
 
 
             setTimeout(() => {
                 onSelectAnswer(answer);
             }, 2000)
-        }, 10000);
+        }, 1000);
     }
 
     let answerState = '';
 
     if(answer.selectedAnswer && answer.isCorrect !== null){
         answerState = answer.isCorrect ? 'correct' : 'wrong';
-    } else if (answer.selectedAnswer){
-        answerState = 'answered'
+        
+    } else if (answer.selectedAnswer) {
+        answerState = 'answered';
+        
     }
+    console.log(answerState);
     return(
         <div id="question">
             <QuestionTimer
